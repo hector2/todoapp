@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="clickListener"
+                type="android.view.View.OnClickListener"/>
+        <variable
+                name="task"
+                type="doritos.com.todoapp.data.Task"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            app:contentPaddingLeft="5dp"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="0.5dp"
+            android:background="@color/card"
+            android:onClick="@{clickListener}"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:background="@color/card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:id="@+id/task_title"
+                    android:text="@{task.name}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    tools:text="esto es una prueba"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                    />
+
+            <com.google.android.material.chip.ChipGroup
+
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp">
+
+
+                <com.google.android.material.chip.Chip
+                        style="@style/Widget.MaterialComponents.Chip.Entry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:chipIcon="@drawable/ic_circle_black_24dp"
+                        app:chipIconSize="8dp"
+                        app:closeIconVisible="false"
+                        app:checkedIconVisible="false"
+                        app:chipIconTint="@color/colorAccent"
+                        app:chipBackgroundColor="@android:color/transparent"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:text="Hoy" />
+
+                <com.google.android.material.chip.Chip
+                        style="@style/Widget.MaterialComponents.Chip.Entry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:chipIcon="@drawable/ic_circle_black_24dp"
+                        app:chipIconSize="8dp"
+                        app:closeIconVisible="false"
+                        app:checkedIconVisible="false"
+                        app:chipIconTint="@color/red"
+                        app:chipBackgroundColor="@android:color/transparent"
+                        android:textColor="@color/white"
+                        android:text="Urgente"
+                        android:textSize="12sp"
+                        android:checked="false"/>
+
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout
+>
+    </androidx.cardview.widget.CardView>
+
+</layout>

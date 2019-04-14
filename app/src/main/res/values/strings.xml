@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Todoapp</string>
+    <string name="to_do">TO-DO</string>
+    <string name="done">DONE</string>
+    <string name="tags">TAGS</string>
+    <string name="to_do_tasks">To-do tasks</string>
+    <string name="search">SEARCH</string>
+</resources>
