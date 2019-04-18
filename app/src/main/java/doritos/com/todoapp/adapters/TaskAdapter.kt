@@ -28,7 +28,7 @@ class TaskAdapter : ListAdapter<Task, TaskAdapter.ViewHolder>(TaskDiffCallback()
 
     private fun createOnClickListener(taskId: String): View.OnClickListener {
         return View.OnClickListener {
-           val direction = TasksListFragmentDirections.ActionTasksListFragmentToTaskDetail(taskId)
+           val direction = TasksListFragmentDirections.actionTasksListFragmentToTaskDetail(taskId)
            it.findNavController().navigate(direction)
         }
     }
