@@ -24,7 +24,7 @@ class DoneFragment : Fragment() {
 
         val binding = DoneFragmentBinding.inflate(inflater, container, false)
 
-        val context = context ?: return binding.root
+        //val context = context ?: return binding.root
         viewModel = ViewModelProviders.of(this).get(DoneViewModel::class.java)
 
         return binding.root

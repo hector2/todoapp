@@ -24,11 +24,11 @@ class TaskDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val taskId = TaskDetailArgs.fromBundle(arguments!!).taskId
+        //val taskId = TaskDetailArgs.fromBundle(arguments!!).taskId
 
-        val factory = InjectorUtils.provideTaskDetailViewModelFactory(requireActivity(), taskId)
-        val taskDetailViewModel = ViewModelProviders.of(this, factory)
-            .get(TaskDetailViewModel::class.java)
+        //val factory = InjectorUtils.provideTaskDetailViewModelFactory(requireActivity(), taskId)
+        //val taskDetailViewModel = ViewModelProviders.of(this, factory)
+        //    .get(TaskDetailViewModel::class.java)
 
         return inflater.inflate(R.layout.task_detail_fragment, container, false)
     }
