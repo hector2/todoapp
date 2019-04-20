@@ -112,6 +112,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
 
+    //Dependency Injection
+    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
 
 
     // Testing dependencies

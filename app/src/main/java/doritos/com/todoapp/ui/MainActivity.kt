@@ -1,11 +1,11 @@
-package doritos.com.todoapp
+package doritos.com.todoapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
-import doritos.com.todoapp.ui.TasksListFragment
+import doritos.com.todoapp.R
 import kotlinx.android.synthetic.main.main_activity.*
 
 

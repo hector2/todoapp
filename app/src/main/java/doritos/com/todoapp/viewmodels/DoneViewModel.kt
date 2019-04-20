@@ -1,4 +1,4 @@
-package doritos.com.todoapp.ui
+package doritos.com.todoapp.viewmodels
 
 import androidx.lifecycle.ViewModel;
 

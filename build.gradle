@@ -30,6 +30,7 @@ buildscript {
         uiAutomatorVersion = '2.2.0'
         workVersion = '1.0.1'
         fuelVersion = '2.0.1'
+        daggerVersion = '2.22.1'
     }
 
     repositories {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import doritos.com.todoapp.databinding.DoneFragmentBinding
+import doritos.com.todoapp.viewmodels.DoneViewModel
 
 
 class DoneFragment : Fragment() {
