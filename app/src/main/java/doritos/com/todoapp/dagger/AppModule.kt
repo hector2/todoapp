@@ -8,6 +8,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import doritos.com.todoapp.data.AppRepository
@@ -21,9 +22,17 @@ import doritos.com.todoapp.workers.SeedDatabaseWorker
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import doritos.com.todoapp.application.App
 
-@Module(includes = [ViewModelModule::class])
+
+
+@Module()
 class AppModule {
+
+    //@Binds
+    //internal fun application(app: App): Application
+
+
     @Provides
     @Singleton
     internal fun provideGson(): Gson {

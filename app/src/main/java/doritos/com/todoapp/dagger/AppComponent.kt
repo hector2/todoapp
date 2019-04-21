@@ -1,12 +1,13 @@
 package doritos.com.todoapp.dagger
 
 import android.app.Application
-import dagger.BindsInstance
+import androidx.fragment.app.Fragment
 import dagger.Component
-import dagger.android.AndroidInjectionModule
-import dagger.android.support.AndroidSupportInjectionModule
-import doritos.com.todoapp.application.App
+import doritos.com.todoapp.ui.TasksListFragment
 import javax.inject.Singleton
+import dagger.BindsInstance
+
+
 
 /*
  * We mark this interface with the @Component annotation.
@@ -19,18 +20,17 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        AndroidInjectionModule::class,
-        AppModule::class,
-        MainActivityModule::class]
+        AppModule::class]
 )
 interface AppComponent {
+    fun inject(fragment: TasksListFragment)
+
+
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: Application): Builder
-
+        fun context(context: Application): Builder
         fun build(): AppComponent
     }
 
-    fun inject(app: App)
 }

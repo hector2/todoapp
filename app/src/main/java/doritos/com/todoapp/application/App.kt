@@ -1,20 +1,15 @@
 package doritos.com.todoapp.application
 
-import android.app.Activity
 import android.app.Application
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import doritos.com.todoapp.dagger.AppInjector
-import javax.inject.Inject
+import doritos.com.todoapp.dagger.AppComponent
+import doritos.com.todoapp.dagger.AppModule
+import doritos.com.todoapp.dagger.DaggerAppComponent
 
-class App : Application(), HasActivityInjector {
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+
+class App : Application() {
+
 
     override fun onCreate() {
         super.onCreate()
-        AppInjector.init(this)
     }
-
-    override fun activityInjector() = dispatchingAndroidInjector
 }

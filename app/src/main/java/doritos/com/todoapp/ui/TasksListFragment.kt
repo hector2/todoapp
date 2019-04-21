@@ -8,18 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import dagger.android.AndroidInjection
-import dagger.android.support.AndroidSupportInjection
+
 
 import doritos.com.todoapp.adapters.TaskAdapter
-import doritos.com.todoapp.dagger.Injectable
+import doritos.com.todoapp.dagger.AppComponent
+import doritos.com.todoapp.dagger.DaggerAppComponent
 import doritos.com.todoapp.data.AppRepository
 import doritos.com.todoapp.databinding.TasksListFragmentBinding
 import doritos.com.todoapp.viewmodels.TaskListViewModel
 import javax.inject.Inject
 
-class TasksListFragment : Fragment(), Injectable {
+class TasksListFragment : Fragment() {
 
 
 
@@ -39,9 +38,18 @@ class TasksListFragment : Fragment(), Injectable {
         super.onCreate(savedInstanceState)
         val binding = TasksListFragmentBinding.inflate(inflater, container, false)
 
-        //val context = context ?: return binding.root
+        val context = context ?: return binding.root
         //val factory = InjectorUtils.provideTaskListViewModelFactory(context)
         //viewModel = ViewModelProviders.of(this).get(TaskListViewModel::class.java)
+
+        //activity?.application?.let { DaggerAppComponent.builder().application(application = it).build().inject(this) }
+
+        //DaggerAppComponent.create().inject(this)
+
+        activity?.application?.let { DaggerAppComponent.builder().context(it).build().inject(this) }
+
+
+
 
         viewModel = TaskListViewModel(repo)
 
