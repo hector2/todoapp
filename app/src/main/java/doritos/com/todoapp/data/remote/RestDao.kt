@@ -13,17 +13,4 @@ public interface RestDao {
     fun getTasks(
     ): Call<List<Task>>
 
-
-    companion object {
-        fun create(): RestDao {
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com")
-                .addConverterFactory(
-                    GsonConverterFactory.create()
-                ).build()
-
-            return retrofit.create(RestDao::class.java)
-        }
-    }
-
 }

@@ -10,10 +10,14 @@ import com.google.gson.stream.JsonReader
 import doritos.com.todoapp.data.local.AppDatabase
 import doritos.com.todoapp.data.Task
 import doritos.com.todoapp.utils.TASK_DATA_FILENAME
+import javax.inject.Inject
 
 
 class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     private val TAG by lazy { SeedDatabaseWorker::class.java.simpleName }
+
+    @Inject
+    lateinit var database: AppDatabase
 
     override fun doWork(): Result {
         val taskType = object : TypeToken<List<Task>>() {}.type
@@ -23,7 +27,7 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
             val inputStream = applicationContext.assets.open(TASK_DATA_FILENAME)
             jsonReader = JsonReader(inputStream.reader())
             val taskList: List<Task> = Gson().fromJson(jsonReader, taskType)
-            val database = AppDatabase.getInstance(applicationContext)
+            //val database = AppDatabase.getInstance(applicationContext)
             database.taskDao().insertAll(taskList)
             Result.success()
         } catch (ex: Exception) {

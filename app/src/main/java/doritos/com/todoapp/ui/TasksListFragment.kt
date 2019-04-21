@@ -1,5 +1,6 @@
 package doritos.com.todoapp.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,36 +8,58 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import dagger.android.AndroidInjection
+import dagger.android.support.AndroidSupportInjection
 
 import doritos.com.todoapp.adapters.TaskAdapter
+import doritos.com.todoapp.dagger.Injectable
+import doritos.com.todoapp.data.AppRepository
 import doritos.com.todoapp.databinding.TasksListFragmentBinding
-import doritos.com.todoapp.utils.InjectorUtils
 import doritos.com.todoapp.viewmodels.TaskListViewModel
+import javax.inject.Inject
 
-class TasksListFragment : Fragment() {
+class TasksListFragment : Fragment(), Injectable {
 
-    companion object {
-        fun newInstance() = TasksListFragment()
-    }
+
+
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: TaskListViewModel
+
+    @Inject
+    lateinit var repo: AppRepository
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        super.onCreate(savedInstanceState)
         val binding = TasksListFragmentBinding.inflate(inflater, container, false)
 
-        val context = context ?: return binding.root
-        val factory = InjectorUtils.provideTaskListViewModelFactory(context)
-        viewModel = ViewModelProviders.of(this, factory).get(TaskListViewModel::class.java)
+        //val context = context ?: return binding.root
+        //val factory = InjectorUtils.provideTaskListViewModelFactory(context)
+        //viewModel = ViewModelProviders.of(this).get(TaskListViewModel::class.java)
+
+        viewModel = TaskListViewModel(repo)
+
 
         val adapter = TaskAdapter()
         binding.taskList.adapter = adapter
         subscribeUi(adapter)
 
+
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
     }
 
 

@@ -1,12 +1,15 @@
 package doritos.com.todoapp.viewmodels
 
+import android.app.Application
+
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel;
 import doritos.com.todoapp.data.AppRepository
 import doritos.com.todoapp.data.local.DbRepository
 import doritos.com.todoapp.data.Task
+import javax.inject.Inject
 
-class TaskListViewModel internal constructor(
+class TaskListViewModel @Inject constructor(
     private val appRepository:AppRepository
 ) : ViewModel() {
 

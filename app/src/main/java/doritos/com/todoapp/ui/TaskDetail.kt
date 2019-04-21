@@ -7,15 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import doritos.com.todoapp.R
-import doritos.com.todoapp.utils.InjectorUtils
 import doritos.com.todoapp.viewmodels.TaskDetailViewModel
 
 
 class TaskDetail : Fragment() {
 
-    companion object {
-        fun newInstance() = TaskDetail()
-    }
 
     private lateinit var viewModel: TaskDetailViewModel
 
