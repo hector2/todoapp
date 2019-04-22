@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import doritos.com.todoapp.adapters.TaskAdapter
 import doritos.com.todoapp.dagger.AppComponent
 import doritos.com.todoapp.dagger.DaggerAppComponent
+import doritos.com.todoapp.dagger.injector
 import doritos.com.todoapp.data.AppRepository
 import doritos.com.todoapp.databinding.TasksListFragmentBinding
 import doritos.com.todoapp.viewmodels.TaskListViewModel
@@ -41,16 +42,7 @@ class TasksListFragment : Fragment() {
         val context = context ?: return binding.root
         //val factory = InjectorUtils.provideTaskListViewModelFactory(context)
         //viewModel = ViewModelProviders.of(this).get(TaskListViewModel::class.java)
-
-        //activity?.application?.let { DaggerAppComponent.builder().application(application = it).build().inject(this) }
-
-        //DaggerAppComponent.create().inject(this)
-
-        activity?.application?.let { DaggerAppComponent.builder().context(it).build().inject(this) }
-
-
-
-
+        injector.inject(this)
         viewModel = TaskListViewModel(repo)
 
 

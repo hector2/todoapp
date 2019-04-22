@@ -1,6 +1,7 @@
 package doritos.com.todoapp.dagger
 
 import android.app.Application
+import android.content.Context
 import androidx.fragment.app.Fragment
 import dagger.Component
 import doritos.com.todoapp.ui.TasksListFragment
@@ -29,7 +30,7 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun context(context: Application): Builder
+        fun context(context: Context): Builder
         fun build(): AppComponent
     }
 

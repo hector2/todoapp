@@ -1,6 +1,7 @@
 package doritos.com.todoapp.dagger
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -71,11 +72,11 @@ class AppModule {
      * */
     @Provides
     @Singleton
-    internal fun provideDatabase(application: Application): AppDatabase {
+    internal fun provideDatabase(context: Context): AppDatabase {
         //TODO: hacer esto bien
         //return AppDatabase.buildDatabase(application)
 
-        return Room.databaseBuilder(application, AppDatabase::class.java, DATABASE_NAME)
+        return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
