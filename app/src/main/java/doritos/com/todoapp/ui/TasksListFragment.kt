@@ -50,8 +50,6 @@ class TasksListFragment : Fragment() {
         binding.taskList.adapter = adapter
         subscribeUi(adapter)
 
-
-
         return binding.root
     }
 

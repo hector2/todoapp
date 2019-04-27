@@ -23,6 +23,8 @@ import dagger.BindsInstance
     modules = [
         AppModule::class]
 )
+
+/*
 interface AppComponent {
     fun inject(fragment: TasksListFragment)
 
@@ -33,5 +35,18 @@ interface AppComponent {
         fun context(context: Context): Builder
         fun build(): AppComponent
     }
+
+}
+
+        */
+
+interface AppComponent {
+
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance applicationContext: Context): AppComponent
+    }
+
+    fun inject(fragment: TasksListFragment)
 
 }

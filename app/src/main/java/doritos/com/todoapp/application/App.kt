@@ -10,9 +10,7 @@ import doritos.com.todoapp.dagger.DaggerComponentProvider
 class App() : Application(), DaggerComponentProvider {
 
     override val component: AppComponent by lazy {
-        DaggerAppComponent.builder()
-            .context(applicationContext)
-            .build()
+        DaggerAppComponent.factory().create(applicationContext)
     }
 
 
