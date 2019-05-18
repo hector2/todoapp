@@ -4,15 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import doritos.com.todoapp.data.local.DbRepository
 import doritos.com.todoapp.data.remote.RestRepository
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.LinkedHashSet
 import javax.inject.Inject
 import kotlin.collections.ArrayList
-import kotlin.collections.List
 
-class AppRepository @Inject constructor(private val restRepository: RestRepository, private val dbRepository: DbRepository) {
+class AppRepository @Inject constructor(
+    private val restRepository: RestRepository,
+    private val dbRepository: DbRepository
+) {
     fun getTasks(): LiveData<List<Task>> {
         val observableFromApi = getTasksFromApi()
         val observableFromDb = getTasksFromDb()
@@ -42,8 +46,20 @@ class AppRepository @Inject constructor(private val restRepository: RestReposito
             override fun onFailure(call: Call<List<Task>>, t: Throwable) {
                 livedata.value = null
             }
+
             override fun onResponse(call: Call<List<Task>>, response: Response<List<Task>>) {
+
+
+                if (response.body() != null) {
+                    GlobalScope.launch {
+                        // launch new coroutine in background and continue
+                        dbRepository.insertAll(response.body()!!)
+                    }
+                }
+
                 livedata.value = response.body()
+
+
             }
         })
         return livedata

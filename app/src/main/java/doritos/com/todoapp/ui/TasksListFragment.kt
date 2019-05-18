@@ -65,6 +65,7 @@ class TasksListFragment : Fragment() {
 
         //aqui observa lo q llega del viewmodel
        viewModel.getTasks().observe(viewLifecycleOwner, Observer { tasks ->
+
             if (tasks != null) adapter.submitList(tasks)
         })
     }

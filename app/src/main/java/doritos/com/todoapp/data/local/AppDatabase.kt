@@ -17,7 +17,7 @@ import doritos.com.todoapp.workers.SeedDatabaseWorker
 /**
  * The Room database for this app
  */
-@Database(entities = [Task::class], version = 1, exportSchema = false)
+@Database(entities = [Task::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao

@@ -28,7 +28,7 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
             jsonReader = JsonReader(inputStream.reader())
             val taskList: List<Task> = Gson().fromJson(jsonReader, taskType)
             //val database = AppDatabase.getInstance(applicationContext)
-            database.taskDao().insertAll(taskList)
+            //database.taskDao().insertAll(taskList)
             Result.success()
         } catch (ex: Exception) {
             Log.e(TAG, "Error seeding database", ex)
