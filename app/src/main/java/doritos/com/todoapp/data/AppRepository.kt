@@ -9,11 +9,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.LinkedHashSet
 import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.collections.ArrayList
 import kotlin.collections.List
 
-@Singleton
 class AppRepository @Inject constructor(private val restRepository: RestRepository, private val dbRepository: DbRepository) {
     fun getTasks(): LiveData<List<Task>> {
         val observableFromApi = getTasksFromApi()

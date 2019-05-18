@@ -9,7 +9,7 @@ import retrofit2.http.GET
 
 
 public interface RestDao {
-    @GET("todos")
+    @GET("tasks")
     fun getTasks(
     ): Call<List<Task>>
 

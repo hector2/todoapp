@@ -9,7 +9,6 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import doritos.com.todoapp.data.AppRepository
@@ -48,7 +47,7 @@ class AppModule {
     @Singleton
     internal fun provideRetrofit(gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
+            .baseUrl("https://todoapp-dorito.herokuapp.com")
             .addConverterFactory(
                 GsonConverterFactory.create(gson)
             ).build()

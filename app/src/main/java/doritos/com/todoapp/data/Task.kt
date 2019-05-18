@@ -9,9 +9,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Task(
     @PrimaryKey @ColumnInfo(name = "id")
-    @SerializedName("id")
+    @SerializedName("ID")
     val taskId: String,
-    @SerializedName("title")
+    @SerializedName("name")
     val name: String
 ) {
 
