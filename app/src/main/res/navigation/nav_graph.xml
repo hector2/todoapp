@@ -11,7 +11,7 @@
                 app:enterAnim="@anim/enter_from_left" app:exitAnim="@anim/enter_from_left"
                 app:popEnterAnim="@anim/enter_from_left" app:popExitAnim="@anim/enter_from_left"/>
     </fragment>
-    <fragment android:id="@+id/taskDetail" android:name="doritos.com.todoapp.ui.TaskDetail"
+    <fragment android:id="@+id/taskDetail" android:name="doritos.com.todoapp.ui.TaskDetailFragment"
               android:label="task_detail_fragment" tools:layout="@layout/task_detail_fragment">
         <argument android:name="taskId" app:argType="string"/>
     </fragment>

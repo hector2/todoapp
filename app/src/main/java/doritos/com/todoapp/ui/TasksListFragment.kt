@@ -1,36 +1,25 @@
 package doritos.com.todoapp.ui
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProviders
+
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-
-
+import androidx.lifecycle.ViewModelProviders
 import doritos.com.todoapp.adapters.TaskAdapter
-import doritos.com.todoapp.dagger.AppComponent
-import doritos.com.todoapp.dagger.DaggerAppComponent
 import doritos.com.todoapp.dagger.injector
-import doritos.com.todoapp.data.AppRepository
 import doritos.com.todoapp.databinding.TasksListFragmentBinding
 import doritos.com.todoapp.viewmodels.TaskListViewModel
+import doritos.com.todoapp.viewmodels.ViewModelFactory
 import javax.inject.Inject
 
 class TasksListFragment : Fragment() {
-
-
-
-    //lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory<TaskListViewModel>
 
     private lateinit var viewModel: TaskListViewModel
-
-    @Inject
-    lateinit var repo: AppRepository
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +29,9 @@ class TasksListFragment : Fragment() {
         val binding = TasksListFragmentBinding.inflate(inflater, container, false)
 
         val context = context ?: return binding.root
-        //val factory = InjectorUtils.provideTaskListViewModelFactory(context)
-        //viewModel = ViewModelProviders.of(this).get(TaskListViewModel::class.java)
         injector.inject(this)
-        viewModel = TaskListViewModel(repo)
 
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TaskListViewModel::class.java)
 
         val adapter = TaskAdapter()
         binding.taskList.adapter = adapter
@@ -57,19 +44,17 @@ class TasksListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
     }
 
 
     private fun subscribeUi(adapter: TaskAdapter) {
 
         //aqui observa lo q llega del viewmodel
-       viewModel.getTasks().observe(viewLifecycleOwner, Observer { tasks ->
+        viewModel.getTasks().observe(viewLifecycleOwner, Observer { tasks ->
 
             if (tasks != null) adapter.submitList(tasks)
         })
     }
-
 
 
 }

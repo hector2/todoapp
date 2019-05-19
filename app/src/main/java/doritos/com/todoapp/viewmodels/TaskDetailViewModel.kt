@@ -1,11 +1,9 @@
 package doritos.com.todoapp.viewmodels
 
 import androidx.lifecycle.ViewModel
-import doritos.com.todoapp.data.AppRepository
+import javax.inject.Inject
 
-class TaskDetailViewModel(
-    repository: AppRepository,
-    private val taskId: String
+class TaskDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     //val task: LiveData<Task>

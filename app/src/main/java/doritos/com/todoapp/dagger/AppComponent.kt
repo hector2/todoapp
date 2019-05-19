@@ -7,7 +7,7 @@ import dagger.Component
 import doritos.com.todoapp.ui.TasksListFragment
 import javax.inject.Singleton
 import dagger.BindsInstance
-
+import doritos.com.todoapp.ui.TaskDetailFragment
 
 
 /*
@@ -48,5 +48,6 @@ interface AppComponent {
     }
 
     fun inject(fragment: TasksListFragment)
+    fun inject(fragment: TaskDetailFragment)
 
 }
