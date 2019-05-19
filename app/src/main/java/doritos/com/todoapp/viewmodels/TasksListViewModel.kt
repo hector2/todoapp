@@ -4,9 +4,11 @@ import android.app.Application
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.viewModelScope
 import doritos.com.todoapp.data.AppRepository
 import doritos.com.todoapp.data.local.DbRepository
 import doritos.com.todoapp.data.Task
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TaskListViewModel @Inject constructor(
@@ -19,11 +21,15 @@ class TaskListViewModel @Inject constructor(
     private val taskList = MediatorLiveData<List<Task>>()
 
     init {
-        //aqui viene lo de room, que es un livedata
-        val liveTaskList = appRepository.getTasks()
 
-        //aqui se podrian hacer modificaciones y añadirlo al mediator. setvalue funciona de modo que si hay observers, le manda el valor a ellos.
-        taskList.addSource(liveTaskList, taskList::setValue)
+        viewModelScope.launch {
+            //aqui viene lo de room, que es un livedata
+            val liveTaskList = appRepository.getTasks()
+
+            //aqui se podrian hacer modificaciones y añadirlo al mediator. setvalue funciona de modo que si hay observers, le manda el valor a ellos.
+            taskList.addSource(liveTaskList, taskList::setValue)
+        }
+
 
     }
 

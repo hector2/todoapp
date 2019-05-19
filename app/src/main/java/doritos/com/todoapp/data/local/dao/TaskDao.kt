@@ -13,10 +13,10 @@ import doritos.com.todoapp.data.Task
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM tasks ORDER BY name")
-    fun getTasks(): LiveData<List<Task>>
+    suspend fun getTasks(): List<Task>
 
     @Query("SELECT * FROM tasks WHERE id = :taskId")
-    fun getTask(taskId: String): LiveData<Task>
+    suspend fun getTask(taskId: String): Task
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(tasks: List<Task>)

@@ -2,15 +2,13 @@ package doritos.com.todoapp.data.remote
 
 
 import doritos.com.todoapp.data.Task
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 
 
 public interface RestDao {
     @GET("tasks")
-    fun getTasks(
-    ): Call<List<Task>>
+     fun getTasks(
+    ): Deferred<List<Task>>
 
 }

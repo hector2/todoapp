@@ -1,6 +1,5 @@
 package doritos.com.todoapp.dagger
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -9,6 +8,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import doritos.com.todoapp.data.AppRepository
@@ -22,8 +22,6 @@ import doritos.com.todoapp.workers.SeedDatabaseWorker
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-import doritos.com.todoapp.application.App
-
 
 
 @Module()
@@ -48,6 +46,7 @@ class AppModule {
     internal fun provideRetrofit(gson: Gson): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://todoapp-dorito.herokuapp.com")
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(
                 GsonConverterFactory.create(gson)
             ).build()
