@@ -17,32 +17,31 @@ class AppRepository @Inject constructor(
         val observableFromApi = getTasksFromApi()
         val observableFromDb = getTasksFromDb()
 
-        val merged = CombinedLiveData<List<Task>, List<Task>, List<Task>>(observableFromApi, observableFromDb) { a, b ->
+        return CombinedLiveData<List<Task>, List<Task>, List<Task>>(observableFromApi, observableFromDb) { a, b ->
             val set = LinkedHashSet<Task>()
             a?.let { set.addAll(it) }
             b?.let { set.addAll(it) }
             ArrayList(set)
         }
-        return merged
     }
 
     suspend fun getTask(taskId: String): Task = dbRepository.getTask(taskId)
 
 
-    suspend fun getTasksFromDb(): LiveData<List<Task>> {
-        val livedata = MutableLiveData<List<Task>>()
+    private suspend fun getTasksFromDb(): LiveData<List<Task>> {
+        val liveData = MutableLiveData<List<Task>>()
         val db = dbRepository.getTasks()
-        livedata.value = db
-        return livedata
+        liveData.value = db
+        return liveData
     }
 
-    suspend fun getTasksFromApi(): LiveData<List<Task>> {
+    private suspend fun getTasksFromApi(): LiveData<List<Task>> {
         val api = restRepository.getTasks()
-        val livedata = MutableLiveData<List<Task>>()
+        val liveData = MutableLiveData<List<Task>>()
         val list = api.await()
-        livedata.value = list
+        liveData.value = list
         dbRepository.insertAll(list)
-        return livedata
+        return liveData
     }
 
 }
