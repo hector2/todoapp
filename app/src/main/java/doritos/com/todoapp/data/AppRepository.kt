@@ -2,25 +2,29 @@ package doritos.com.todoapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import doritos.com.todoapp.data.database.DatabaseTask
 import doritos.com.todoapp.data.database.DbRepository
 import doritos.com.todoapp.data.network.RestRepository
-import doritos.com.todoapp.data.network.TaskDTO
 import doritos.com.todoapp.domain.Task
-import java.util.LinkedHashSet
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 
 class AppRepository @Inject constructor(
     private val restRepository: RestRepository,
     private val dbRepository: DbRepository
 ) {
-    suspend fun getTasks(): LiveData<List<Task>> {
-        val observableFromApi = getTasksFromApi()
+     fun getTasks(): LiveData<List<Task>> {
+        //val observableFromApi = getTasksFromApi()
         val observableFromDb = getTasksFromDb()
+         return Transformations.map(observableFromDb) { x ->
+             x.map {
+                 Task(taskId = it.taskId,name = it.name)
+             }
+         }
 
-        return observableFromApi
+
+        //return observableFromApi
 
         /*return CombinedLiveData<List<DatabaseTask>, List<DatabaseTask>, List<DatabaseTask>>(observableFromApi, observableFromDb) { a, b ->
             val set = LinkedHashSet<DatabaseTask>()
@@ -33,11 +37,8 @@ class AppRepository @Inject constructor(
     suspend fun getTask(taskId: String): DatabaseTask = dbRepository.getTask(taskId)
 
 
-    private suspend fun getTasksFromDb(): LiveData<List<DatabaseTask>> {
-        val liveData = MutableLiveData<List<DatabaseTask>>()
-        val db = dbRepository.getTasks()
-        liveData.value = db
-        return liveData
+    private fun getTasksFromDb(): LiveData<List<DatabaseTask>> {
+        return dbRepository.getTasks()
     }
 
     private suspend fun getTasksFromApi(): LiveData<List<Task>> {
