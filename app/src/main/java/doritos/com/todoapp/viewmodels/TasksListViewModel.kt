@@ -21,6 +21,8 @@ class TaskListViewModel @Inject constructor(
     init {
 
         viewModelScope.launch {
+
+            appRepository.refreshTasks()
             //aqui viene lo de room, que es un livedata
             val liveTaskList = appRepository.getTasks()
 

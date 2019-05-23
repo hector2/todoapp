@@ -6,7 +6,10 @@ import androidx.lifecycle.Transformations
 import doritos.com.todoapp.data.database.DatabaseTask
 import doritos.com.todoapp.data.database.DbRepository
 import doritos.com.todoapp.data.network.RestRepository
+import doritos.com.todoapp.data.network.TaskDTO
 import doritos.com.todoapp.domain.Task
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -14,8 +17,28 @@ class AppRepository @Inject constructor(
     private val restRepository: RestRepository,
     private val dbRepository: DbRepository
 ) {
-     fun getTasks(): LiveData<List<Task>> {
-        //val observableFromApi = getTasksFromApi()
+
+
+
+    suspend fun refreshTasks() {
+        withContext(Dispatchers.IO) {
+            val tasklist = restRepository.getTasks().await()
+            dbRepository.insertAll(tasklist.asDatabaseModel())
+        }
+    }
+
+
+     suspend fun getTasks(): LiveData<List<Task>> {
+        val observableFromApi = getTasksFromApi()
+//
+//         val result =  Transformations.map(observableFromApi) {
+//             it.map {x ->
+//                 Task(taskId = x.taskId,name = x.name)
+//             }
+//         }
+//
+//         return result
+
         val observableFromDb = getTasksFromDb()
          return Transformations.map(observableFromDb) { x ->
              x.map {
@@ -41,10 +64,10 @@ class AppRepository @Inject constructor(
         return dbRepository.getTasks()
     }
 
-    private suspend fun getTasksFromApi(): LiveData<List<Task>> {
+    private suspend fun getTasksFromApi(): LiveData<List<TaskDTO>> {
         val api = restRepository.getTasks()
-        val liveData = MutableLiveData<List<Task>>()
-        val list = api.await().asDomainModel()
+        val liveData = MutableLiveData<List<TaskDTO>>()
+        val list = api.await()
 
         liveData.value = list
 
