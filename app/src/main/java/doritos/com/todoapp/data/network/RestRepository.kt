@@ -1,4 +1,4 @@
-package doritos.com.todoapp.data.remote
+package doritos.com.todoapp.data.network
 
 import javax.inject.Inject
 class RestRepository @Inject constructor(private val restDao: RestDao) {

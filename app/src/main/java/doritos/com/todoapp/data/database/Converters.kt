@@ -1,4 +1,4 @@
-package doritos.com.todoapp.data.local
+package doritos.com.todoapp.data.database
 
 import androidx.room.TypeConverter
 import java.util.Calendar

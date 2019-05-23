@@ -12,11 +12,11 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import dagger.Module
 import dagger.Provides
 import doritos.com.todoapp.data.AppRepository
-import doritos.com.todoapp.data.local.AppDatabase
-import doritos.com.todoapp.data.local.DbRepository
-import doritos.com.todoapp.data.local.dao.TaskDao
-import doritos.com.todoapp.data.remote.RestDao
-import doritos.com.todoapp.data.remote.RestRepository
+import doritos.com.todoapp.data.database.AppDatabase
+import doritos.com.todoapp.data.database.DbRepository
+import doritos.com.todoapp.data.database.dao.TaskDao
+import doritos.com.todoapp.data.network.RestDao
+import doritos.com.todoapp.data.network.RestRepository
 import doritos.com.todoapp.utils.DATABASE_NAME
 import doritos.com.todoapp.workers.SeedDatabaseWorker
 import retrofit2.Retrofit
@@ -75,6 +75,7 @@ class AppModule {
         //return AppDatabase.buildDatabase(application)
 
         return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+            .fallbackToDestructiveMigration()
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)

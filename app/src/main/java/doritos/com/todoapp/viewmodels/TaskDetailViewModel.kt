@@ -6,7 +6,7 @@ import javax.inject.Inject
 class TaskDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
-    //val task: LiveData<Task>
+    //val task: LiveData<DatabaseTask>
 
     override fun onCleared() {
         super.onCleared()

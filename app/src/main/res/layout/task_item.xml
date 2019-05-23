@@ -9,7 +9,7 @@
                 type="android.view.View.OnClickListener"/>
         <variable
                 name="task"
-                type="doritos.com.todoapp.data.Task"/>
+                type="doritos.com.todoapp.domain.Task"/>
     </data>
 
     <androidx.cardview.widget.CardView

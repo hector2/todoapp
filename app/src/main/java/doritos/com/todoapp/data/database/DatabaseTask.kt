@@ -1,17 +1,13 @@
-package doritos.com.todoapp.data
+package doritos.com.todoapp.data.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "tasks")
-
-data class Task(
+data class DatabaseTask(
     @PrimaryKey @ColumnInfo(name = "id")
-    @SerializedName("ID")
     val taskId: String,
-    @SerializedName("name")
     val name: String
 ) {
 

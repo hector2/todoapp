@@ -1,13 +1,11 @@
 package doritos.com.todoapp.viewmodels
 
-import android.app.Application
-
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope
 import doritos.com.todoapp.data.AppRepository
-import doritos.com.todoapp.data.local.DbRepository
-import doritos.com.todoapp.data.Task
+import doritos.com.todoapp.data.database.DatabaseTask
+import doritos.com.todoapp.domain.Task
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

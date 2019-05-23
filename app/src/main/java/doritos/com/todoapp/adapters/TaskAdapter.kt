@@ -7,8 +7,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import doritos.com.todoapp.data.Task
+
 import doritos.com.todoapp.databinding.TaskItemBinding
+import doritos.com.todoapp.domain.Task
 import doritos.com.todoapp.ui.TasksListFragmentDirections
 
 class TaskAdapter : ListAdapter<Task, TaskAdapter.ViewHolder>(TaskDiffCallback()) {

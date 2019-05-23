@@ -10,7 +10,7 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 
-inline fun <reified T> lambdaMock(): T = mock(T::class.java)
+//inline fun <reified T> lambdaMock(): T = mock(T::class.java)
 
 class ExampleUnitTest {
     @Test
