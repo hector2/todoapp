@@ -10,6 +10,7 @@ import doritos.com.todoapp.data.network.TaskDTO
 import doritos.com.todoapp.domain.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -22,14 +23,18 @@ class AppRepository @Inject constructor(
 
     suspend fun refreshTasks() {
         withContext(Dispatchers.IO) {
-            val tasklist = restRepository.getTasks().await()
-            dbRepository.insertAll(tasklist.asDatabaseModel())
+            try {
+                val tasklist = restRepository.getTasks().await()
+                dbRepository.insertAll(tasklist.asDatabaseModel())
+            } catch (e:Exception) {
+                Timber.i(e)
+            }
         }
     }
 
 
      suspend fun getTasks(): LiveData<List<Task>> {
-        val observableFromApi = getTasksFromApi()
+        //val observableFromApi = getTasksFromApi()
 //
 //         val result =  Transformations.map(observableFromApi) {
 //             it.map {x ->

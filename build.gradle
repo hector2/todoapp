@@ -53,6 +53,9 @@ buildscript {
         coreTestingVersion = '2.1.0-alpha01'
         espressoVersion = '3.2.0-alpha03'
         junitVersion = '4.13-beta-2'
+
+        //log
+        timberVersion = '4.7.1'
     }
 
     repositories {
